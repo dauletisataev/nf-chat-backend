@@ -15,6 +15,19 @@ class ChatService {
       lastMessage: message._id,
     });
   }
+
+  async sendFileMessage(from: string, conversationID: string, fileUrl: string) {
+    const message = await messageModel.create({
+      chat: conversationID,
+      sender: from,
+      fileUrl: fileUrl,
+      isRead: false
+    });
+
+    await chatModel.findByIdAndUpdate(conversationID, {
+      lastMessage: message._id
+    });
+  }
 }
 
 export default ChatService;
