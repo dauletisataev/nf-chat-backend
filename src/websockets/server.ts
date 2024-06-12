@@ -12,7 +12,7 @@ export default (expressServer) => {
   const io = SocketIOService.instance().getServer();
 
   io.on("connection", async (socket) => {
-    const session = (socket.request as any).session;
+    // const session = (socket.request as any).session;
 
     socket.on(SOCKET_EVENTS.JOIN_CHAT, async ({ ...roomObject }) => {
       const room = roomObject.chatId;
