@@ -1,9 +1,13 @@
 import mongoose from "mongoose";
+import { MESSAGE_TYPE } from "../../consts";
 
 export interface IMessage {
   text: string;
+  type: MESSAGE_TYPE;
   sender: mongoose.Types.ObjectId;
   chat: mongoose.Types.ObjectId;
+  isRead: boolean;
+  // image?: mongoose.Types.ObjectId;
 }
 
 export interface MessageModel extends IMessage, mongoose.Document {}
@@ -13,6 +17,10 @@ const chatSchema = new mongoose.Schema(
     text: {
       type: String,
       required: true,
+    },
+    type: {
+      type: String,
+      default: MESSAGE_TYPE.TEXT,
     },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
@@ -24,6 +32,14 @@ const chatSchema = new mongoose.Schema(
       ref: "Chat",
       required: true,
     },
+    isRead: {
+      type: Boolean,
+      default: false,
+    },
+    // image: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "Image",
+    // },
   },
   {
     timestamps: true,
