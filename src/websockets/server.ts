@@ -16,6 +16,7 @@ export default (expressServer) => {
 
     socket.on(SOCKET_EVENTS.JOIN_CHAT, async ({ ...roomObject }) => {
       const room = roomObject.chatId;
+      console.log("joining room", room);
       if (
         io.sockets.adapter.rooms.get(room) &&
         io.sockets.adapter.rooms.get(room)!.size > 0

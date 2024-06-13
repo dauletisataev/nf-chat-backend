@@ -14,6 +14,8 @@ class ChatService {
     await chatModel.findByIdAndUpdate(conversationID, {
       lastMessage: message._id,
     });
+
+    return message;
   }
 }
 
