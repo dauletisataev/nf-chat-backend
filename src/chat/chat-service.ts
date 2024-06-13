@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { messageModel } from "./models/message";
 import { chatModel } from "./models/chat";
 
@@ -18,18 +17,7 @@ class ChatService {
     return message;
   }
 
-  async sendFileMessage(from: string, conversationID: string, fileUrl: string) {
-    const message = await messageModel.create({
-      chat: conversationID,
-      sender: from,
-      fileUrl: fileUrl,
-      isRead: false
-    });
-
-    await chatModel.findByIdAndUpdate(conversationID, {
-      lastMessage: message._id
-    });
-  }
+  
 }
 
 export default ChatService;
